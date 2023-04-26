@@ -31,4 +31,12 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Get the loans for the book.
+     */
+    public function loans()
+    {
+        return $this->belongsToMany(Loan::class, 'loans', 'book_id', 'client_id');
+    }
 }

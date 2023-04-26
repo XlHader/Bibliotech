@@ -4,57 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    private AuthService $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
     public function login(LoginRequest $request)
     {
-        $data = $request->validated();
-
-        if (!Auth::attempt($data)) {
-            return response()->json([
-                'errors' => [
-                    'session' => ['La combinación de correo electrónico y contraseña no es válida']
-                ]
-            ], 422);
+        try {
+            return jsonResponse('Sesión iniciada correctamente', $this->authService->login($request->validated()));
+        } catch (\Exception $e) {
+            return validationErrorResponse(['Login' => $e->getMessage()], $e->getCode());
         }
-
-        $user = Auth::user();
-
-        return [
-            'token' => $user->createToken('token')->plainTextToken,
-            'user' => $user,
-            'message' => 'Sesión iniciada correctamente'
-        ];
     }
 
     public function register(RegisterRequest $request)
     {
-        $data = $request->validated();
-        
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password'])
-        ]);
-
-        return [
-            'token' => $user->createToken('token')->plainTextToken,
-            'user' => $user,
-            'message' => 'Usuario creado correctamente'
-        ];
+        try {
+            return jsonResponse('Usuario creado correctamente', $this->authService->register($request->validated()));
+        } catch (\Exception $e) {
+            return validationErrorResponse(['Register' => $e->getMessage()], $e->getCode());
+        }
     }
     public function logout(Request $request)
     {
-        $user = $request->user();
-        $user->currentAccessToken()->delete();
-
-        return [
-            'user' => null,
-            'message' => 'Sesión cerrada correctamente'
-        ];
+        try {
+            return jsonResponse('Sesión cerrada correctamente', $this->authService->logout($request->user()));
+        } catch (\Exception $e) {
+            return validationErrorResponse(['Logout' => $e->getMessage()], $e->getCode());
+        }
     }
 }

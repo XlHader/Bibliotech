@@ -5,6 +5,8 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DocumentTypeController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\RefundController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,11 +30,20 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::apiResource('/clients', ClientController::class);
     
+    Route::apiResource('/categories', CategorieController::class);
+
     Route::apiResource('/books', BookController::class);
+
+    Route::apiResource('/loans', LoanController::class);
+
+    Route::get('/refunds', [RefundController::class, 'index']);
+
+    Route::get('/refunds/{refundId}', [RefundController::class, 'show']);
+
+    Route::post('/loans/{loanId}/refunds', [RefundController::class, 'store']);
 });
 
 Route::apiResource('/document-types', DocumentTypeController::class);
-Route::apiResource('/categories', CategorieController::class);
 
 // Auth
 Route::post('/register', [AuthController::class, 'register']);

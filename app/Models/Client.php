@@ -40,4 +40,10 @@ class Client extends Model
         return $this->belongsTo(DocumentType::class);
     }
     
+    /**
+     * Get the loans for the client.
+     */
+    public function loans() {
+        return $this->belongsToMany(Book::class, 'loans', 'client_id', 'book_id');
+    }
 }
