@@ -1,0 +1,1332 @@
+{
+    "collection": {
+        "info": {
+            "_postman_id": "ec3c402e-02b7-46b8-88af-1333ce7bfd9f",
+            "name": "Bibliotech",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+            "updatedAt": "2023-04-27T01:02:34.000Z",
+            "uid": "27062196-ec3c402e-02b7-46b8-88af-1333ce7bfd9f"
+        },
+        "item": [
+            {
+                "name": "Auth",
+                "item": [
+                    {
+                        "name": "Register",
+                        "event": [
+                            {
+                                "listen": "prerequest",
+                                "script": {
+                                    "id": "d122009c-4cfc-4c8f-aa72-2eba4e1f0f82",
+                                    "exec": [
+                                        ""
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            },
+                            {
+                                "listen": "test",
+                                "script": {
+                                    "id": "f34c8d52-49aa-4280-ac91-8a7dbda1b735",
+                                    "exec": [
+                                        "pm.test(\"Save bearer token\", () => {\r",
+                                        "   const { data } = pm.response.json()\r",
+                                        "   const { token } = data\r",
+                                        "   pm.collectionVariables.set('BEARER_TOKEN', token)\r",
+                                        "})"
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            }
+                        ],
+                        "id": "7150ee92-434e-43ad-8c59-0f13f418b0c1",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "body": {
+                                "mode": "formdata",
+                                "formdata": [
+                                    {
+                                        "key": "name",
+                                        "value": "Postman Example",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "email",
+                                        "value": "postman@example.com",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "password",
+                                        "value": "User1234!",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "password_confirmation",
+                                        "value": "User1234!",
+                                        "type": "text"
+                                    }
+                                ]
+                            },
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/register",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "register"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-7150ee92-434e-43ad-8c59-0f13f418b0c1"
+                    },
+                    {
+                        "name": "Logout",
+                        "event": [
+                            {
+                                "listen": "test",
+                                "script": {
+                                    "id": "90b7a842-7de5-479f-98b8-dfecdede5bff",
+                                    "exec": [
+                                        "pm.test(\"Save bearer token\", () => {\r",
+                                        "    pm.collectionVariables.unset('BEARER_TOKEN')\r",
+                                        "})"
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            },
+                            {
+                                "listen": "prerequest",
+                                "script": {
+                                    "id": "8581f619-8fa4-46af-bcfd-a4ea0b2b44f0",
+                                    "exec": [
+                                        ""
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            }
+                        ],
+                        "id": "c88e4ff3-071e-43c9-8893-83f24ba40259",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "auth": {
+                                "type": "bearer",
+                                "bearer": [
+                                    {
+                                        "key": "token",
+                                        "value": "{{BEARER_TOKEN}}",
+                                        "type": "string"
+                                    }
+                                ]
+                            },
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/logout",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "logout"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-c88e4ff3-071e-43c9-8893-83f24ba40259"
+                    },
+                    {
+                        "name": "Login",
+                        "event": [
+                            {
+                                "listen": "test",
+                                "script": {
+                                    "id": "f98f1db6-f42c-4d50-9be9-617f14b348a8",
+                                    "exec": [
+                                        "pm.test(\"Save bearer token\", () => {\r",
+                                        "   const { data } = pm.response.json()\r",
+                                        "   const { token } = data   \r",
+                                        "   pm.collectionVariables.set('BEARER_TOKEN', token)\r",
+                                        "})"
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            }
+                        ],
+                        "id": "2c175f86-70dd-4492-bc34-141dd25cd535",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "body": {
+                                "mode": "formdata",
+                                "formdata": [
+                                    {
+                                        "key": "email",
+                                        "value": "admin@example.com",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "password",
+                                        "value": "Admin123!",
+                                        "type": "text"
+                                    }
+                                ]
+                            },
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/login",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "login"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-2c175f86-70dd-4492-bc34-141dd25cd535"
+                    }
+                ],
+                "id": "5d3e7856-3985-4f62-870e-52a988d2668a",
+                "event": [
+                    {
+                        "listen": "prerequest",
+                        "script": {
+                            "id": "28d6cf48-e544-4689-9576-1be69c2ff534",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    },
+                    {
+                        "listen": "test",
+                        "script": {
+                            "id": "4ae9233c-7e5f-4423-b622-72154982eadb",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "uid": "27062196-5d3e7856-3985-4f62-870e-52a988d2668a"
+            },
+            {
+                "name": "Document Types",
+                "item": [
+                    {
+                        "name": "Get Document Types",
+                        "id": "372cb097-8191-4bbb-b2a7-75045be3ad08",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "auth": {
+                                "type": "noauth"
+                            },
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/document-types",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "document-types"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-372cb097-8191-4bbb-b2a7-75045be3ad08"
+                    }
+                ],
+                "id": "196345dd-1b35-4fb5-b85b-16c2b287f6bc",
+                "uid": "27062196-196345dd-1b35-4fb5-b85b-16c2b287f6bc"
+            },
+            {
+                "name": "Clients",
+                "item": [
+                    {
+                        "name": "Store Client",
+                        "id": "90d72faf-bc04-464b-beec-697d6be2085c",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "body": {
+                                "mode": "formdata",
+                                "formdata": [
+                                    {
+                                        "key": "first_name",
+                                        "value": "First Example 3",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "last_name",
+                                        "value": "Last Example 3",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "document_type_id",
+                                        "value": "1",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "document_number",
+                                        "value": "123456781",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "birth_date",
+                                        "value": "2002-02-02",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "phone_number",
+                                        "value": "3131234567",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "direction",
+                                        "value": "Calle 85 #32",
+                                        "type": "text"
+                                    }
+                                ]
+                            },
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/clients",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "clients"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-90d72faf-bc04-464b-beec-697d6be2085c"
+                    },
+                    {
+                        "name": "Update Client",
+                        "id": "7ac5d378-d898-4186-9eeb-df2d58268a6a",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "PUT",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/clients/1?first_name=First Update&last_name=Last Update&direction=Calle 86 Update",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "clients",
+                                    "1"
+                                ],
+                                "query": [
+                                    {
+                                        "key": "first_name",
+                                        "value": "First Update"
+                                    },
+                                    {
+                                        "key": "last_name",
+                                        "value": "Last Update"
+                                    },
+                                    {
+                                        "key": "direction",
+                                        "value": "Calle 86 Update"
+                                    }
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-7ac5d378-d898-4186-9eeb-df2d58268a6a"
+                    },
+                    {
+                        "name": "Delete Client",
+                        "id": "a9b1d821-cee4-4569-ab4d-56c68cbcaacc",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "DELETE",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/clients/1",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "clients",
+                                    "1"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-a9b1d821-cee4-4569-ab4d-56c68cbcaacc"
+                    },
+                    {
+                        "name": "Get Clients",
+                        "id": "c41445ab-60a6-4288-b8d7-83a1ddde0e69",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/clients",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "clients"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-c41445ab-60a6-4288-b8d7-83a1ddde0e69"
+                    },
+                    {
+                        "name": "Get Client",
+                        "id": "b99eb902-44e4-4506-8f2f-50ef40c0088e",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/clients/2",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "clients",
+                                    "2"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-b99eb902-44e4-4506-8f2f-50ef40c0088e"
+                    }
+                ],
+                "id": "82b39420-27d7-4797-a555-e48d50e1dfa7",
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{BEARER_TOKEN}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "event": [
+                    {
+                        "listen": "prerequest",
+                        "script": {
+                            "id": "348fe776-1fd5-42c9-b3a1-145956a500b7",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    },
+                    {
+                        "listen": "test",
+                        "script": {
+                            "id": "c671b1a4-17bf-48f2-a232-989f91054621",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "uid": "27062196-82b39420-27d7-4797-a555-e48d50e1dfa7"
+            },
+            {
+                "name": "Categories",
+                "item": [
+                    {
+                        "name": "Get Categories",
+                        "id": "f0398233-7fbd-4d21-b885-c01a86751aa8",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/categories",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "categories"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-f0398233-7fbd-4d21-b885-c01a86751aa8"
+                    }
+                ],
+                "id": "6a09c8f3-f375-4765-bb7c-68b4811d8d61",
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{BEARER_TOKEN}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "event": [
+                    {
+                        "listen": "prerequest",
+                        "script": {
+                            "id": "339516bf-fc3e-4b1d-8ad5-8efef2487f31",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    },
+                    {
+                        "listen": "test",
+                        "script": {
+                            "id": "985f8be0-1747-4b25-b9a8-5695e6604631",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "uid": "27062196-6a09c8f3-f375-4765-bb7c-68b4811d8d61"
+            },
+            {
+                "name": "Books",
+                "item": [
+                    {
+                        "name": "Store Book",
+                        "id": "52afcef0-e8a1-431b-b668-f72e274e7b19",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "body": {
+                                "mode": "formdata",
+                                "formdata": [
+                                    {
+                                        "key": "title",
+                                        "value": "El imperio final",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "author",
+                                        "value": "Brandon Sanderson",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "number_pages",
+                                        "value": "720",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "icon",
+                                        "value": "https://unlibroparaestanoche.files.wordpress.com/2016/11/img_0301.png",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "isbn_code",
+                                        "value": "987654435",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "category_id",
+                                        "value": "3",
+                                        "type": "text"
+                                    }
+                                ]
+                            },
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/books",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "books"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-52afcef0-e8a1-431b-b668-f72e274e7b19"
+                    },
+                    {
+                        "name": "Update Book State",
+                        "event": [
+                            {
+                                "listen": "prerequest",
+                                "script": {
+                                    "id": "82209b8f-748a-475c-adb0-3a24aaec59fa",
+                                    "exec": [
+                                        ""
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            }
+                        ],
+                        "id": "ee69b426-e19e-4270-b101-95760cbaa48d",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "PATCH",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/books/1?is_avaible=0",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "books",
+                                    "1"
+                                ],
+                                "query": [
+                                    {
+                                        "key": "is_avaible",
+                                        "value": "0"
+                                    }
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-ee69b426-e19e-4270-b101-95760cbaa48d"
+                    },
+                    {
+                        "name": "Delete Book",
+                        "event": [
+                            {
+                                "listen": "prerequest",
+                                "script": {
+                                    "id": "82209b8f-748a-475c-adb0-3a24aaec59fa",
+                                    "exec": [
+                                        ""
+                                    ],
+                                    "type": "text/javascript"
+                                }
+                            }
+                        ],
+                        "id": "61f5997d-b58f-4026-8cda-b6c22a1889e8",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "DELETE",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/books/1",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "books",
+                                    "1"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-61f5997d-b58f-4026-8cda-b6c22a1889e8"
+                    },
+                    {
+                        "name": "Get Books",
+                        "id": "c3e10612-663c-4bbf-9340-fceccaa17eb7",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/books",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "books"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-c3e10612-663c-4bbf-9340-fceccaa17eb7"
+                    },
+                    {
+                        "name": "Get Book",
+                        "id": "7f1d8089-7f46-4b10-b748-825abaf2aa63",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/books/2",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "books",
+                                    "2"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-7f1d8089-7f46-4b10-b748-825abaf2aa63"
+                    }
+                ],
+                "id": "dbb22593-d5a7-4a61-8c00-b6a7bdc810c6",
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{BEARER_TOKEN}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "event": [
+                    {
+                        "listen": "prerequest",
+                        "script": {
+                            "id": "4c1b39c1-e1d6-4afd-8b24-c36013e2a704",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    },
+                    {
+                        "listen": "test",
+                        "script": {
+                            "id": "ed07972d-4365-40b3-b149-33afba66d797",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "uid": "27062196-dbb22593-d5a7-4a61-8c00-b6a7bdc810c6"
+            },
+            {
+                "name": "Loans",
+                "item": [
+                    {
+                        "name": "Store Loan",
+                        "id": "f143b2c5-5633-43c1-a4c8-0293f3bd0f8e",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "body": {
+                                "mode": "formdata",
+                                "formdata": [
+                                    {
+                                        "key": "client_id",
+                                        "value": "2",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "books_ids",
+                                        "value": "[4,5,6]",
+                                        "type": "text"
+                                    }
+                                ]
+                            },
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/loans",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "loans"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-f143b2c5-5633-43c1-a4c8-0293f3bd0f8e"
+                    },
+                    {
+                        "name": "Get Loans",
+                        "id": "8ffbd293-098b-4244-963f-743569140780",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/loans",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "loans"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-8ffbd293-098b-4244-963f-743569140780"
+                    },
+                    {
+                        "name": "Get Loan",
+                        "id": "0e221299-4935-40ea-99b6-5d0b9a326a06",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/loans/1",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "loans",
+                                    "1"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-0e221299-4935-40ea-99b6-5d0b9a326a06"
+                    },
+                    {
+                        "name": "Delete Loan",
+                        "id": "735aaf84-9c48-474e-ad10-69e4af44c53b",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "DELETE",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/loans/1",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "loans",
+                                    "1"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-735aaf84-9c48-474e-ad10-69e4af44c53b"
+                    },
+                    {
+                        "name": "Edit Loan",
+                        "id": "834de413-cf1f-41cf-983d-33097c5073a9",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "PUT",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/loans/2?return_date_limit=2023-04-23",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "loans",
+                                    "2"
+                                ],
+                                "query": [
+                                    {
+                                        "key": "return_date_limit",
+                                        "value": "2023-04-23"
+                                    }
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-834de413-cf1f-41cf-983d-33097c5073a9"
+                    }
+                ],
+                "id": "a3739fbf-b3ef-4ae0-91c0-233aa894c22c",
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{BEARER_TOKEN}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "event": [
+                    {
+                        "listen": "prerequest",
+                        "script": {
+                            "id": "73e6d58d-7fba-405a-9a2b-fba32c975672",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    },
+                    {
+                        "listen": "test",
+                        "script": {
+                            "id": "ba262258-003e-4f59-8c71-354e936ed572",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "uid": "27062196-a3739fbf-b3ef-4ae0-91c0-233aa894c22c"
+            },
+            {
+                "name": "Refunds",
+                "item": [
+                    {
+                        "name": "Store Refund",
+                        "id": "1166a33e-1580-43ec-8209-d5a8a3d95306",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/loans/2/refunds",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "loans",
+                                    "2",
+                                    "refunds"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-1166a33e-1580-43ec-8209-d5a8a3d95306"
+                    },
+                    {
+                        "name": "Get Refunds",
+                        "id": "d1b11975-99c3-47da-8038-ada8e44162ac",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/refunds",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "refunds"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-d1b11975-99c3-47da-8038-ada8e44162ac"
+                    },
+                    {
+                        "name": "Get Refund",
+                        "id": "5b569294-c45a-49bc-a303-2bc1b867882c",
+                        "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                        },
+                        "request": {
+                            "method": "GET",
+                            "header": [
+                                {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "X-Requested-With",
+                                    "value": "XMLHttpRequest",
+                                    "type": "text"
+                                }
+                            ],
+                            "url": {
+                                "raw": "{{BASE_URL}}/api/refunds/1",
+                                "host": [
+                                    "{{BASE_URL}}"
+                                ],
+                                "path": [
+                                    "api",
+                                    "refunds",
+                                    "1"
+                                ]
+                            }
+                        },
+                        "response": [],
+                        "uid": "27062196-5b569294-c45a-49bc-a303-2bc1b867882c"
+                    }
+                ],
+                "id": "b617c998-c435-48c2-8386-d9562f04ac50",
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{BEARER_TOKEN}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "event": [
+                    {
+                        "listen": "prerequest",
+                        "script": {
+                            "id": "966ba9be-aa14-418e-bb9e-d0ede26990c9",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    },
+                    {
+                        "listen": "test",
+                        "script": {
+                            "id": "adcdb5d4-a535-41b0-8539-53957c56b264",
+                            "type": "text/javascript",
+                            "exec": [
+                                ""
+                            ]
+                        }
+                    }
+                ],
+                "uid": "27062196-b617c998-c435-48c2-8386-d9562f04ac50"
+            }
+        ],
+        "event": [
+            {
+                "listen": "prerequest",
+                "script": {
+                    "id": "942e82cb-9906-4781-9827-a0e100f1b5e6",
+                    "type": "text/javascript",
+                    "exec": [
+                        ""
+                    ]
+                }
+            },
+            {
+                "listen": "test",
+                "script": {
+                    "id": "44f23930-18b5-48cb-b5c9-39e18bbfcd62",
+                    "type": "text/javascript",
+                    "exec": [
+                        ""
+                    ]
+                }
+            }
+        ],
+        "variable": [
+            {
+                "id": "f4c02363-5631-488b-9818-563ba9183221",
+                "key": "BASE_URL",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "id": "64db6b9c-dd33-4f14-a2d8-0f9ee963218e",
+                "key": "BEARER_TOKEN",
+                "value": ""
+            }
+        ]
+    }
+}

@@ -72,9 +72,9 @@ After the choice, you must run:
 | :-------- | :------- |
 |`./vendor/bin/sail artisan migrate --seed` | `php artisan migrate --seed` |
 
-## Postman Collection
+## API Documentation
 
-https://api.postman.com/collections/27062196-ec3c402e-02b7-46b8-88af-1333ce7bfd9f?access_key=PMAT-01GYZ2M901ESB131DW17KJ345W
+Postman collection is available at the file `postman_collection.json`
 
 ### Auth
 
