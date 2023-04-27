@@ -85,7 +85,7 @@ class LoanController extends Controller
 
             $loan->delete();
 
-            return jsonResponse('Préstamo eliminado correctamente.', $loan);
+            return jsonResponse('Préstamo eliminado correctamente.');
         } catch (ModelNotFoundException $e) {
             return validationErrorResponse(['Loan' => $e->getMessage()], getStatusResponse($e->getCode()));
         }

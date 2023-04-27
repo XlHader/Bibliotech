@@ -28,15 +28,21 @@ class RefundController extends Controller
         try {
             $loan = RefundService::getLoan($loanId);
 
-            $refund = RefundService::createRefund($loanId, now()->add(20, 'days'));
+            $refundData = [
+                'loan_id' => $loanId,
+                'refund_date' => now()->add(20, 'days') // Simulando que se entrego después de 20 días. Normalmente solo iría Now()
+            ];
 
             $loanReturnDateLimit = new Carbon($loan['return_date_limit']);
 
             if (RefundService::validateLoanReturnDateLimit($loanReturnDateLimit)) {
                 $daysOfDelay = RefundService::getDaysOfDelay($loanReturnDateLimit);
                 $penalty = RefundService::getPenalty($daysOfDelay);
-                RefundService::updateRefund($refund, $daysOfDelay, $penalty);
+                $refundData['days_of_delay'] = $daysOfDelay;
+                $refundData['penalty'] = $penalty;
             }
+
+            $refund = RefundService::createRefund($refundData);
 
             $message = RefundService::getRefundMessage($loan['book']['title'], $daysOfDelay ?? 0, $penalty ?? 0);
 
@@ -55,7 +61,7 @@ class RefundController extends Controller
             $refund = Refund::with('loan')->findOrFail($refundId);
             return jsonResponse('Devolución encontrada', $refund);
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['refund' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['refund' => 'No se ha encontrado una devolución con el ID ingresado.'], getStatusResponse($e->getCode()));
         }
     }
 

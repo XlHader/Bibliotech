@@ -11,7 +11,9 @@ class Refund extends Model
 
     protected $fillable = [
         'loan_id',
-        'refund_date'
+        'refund_date',
+        'days_of_delay',
+        'penalty'
     ];
 
     protected $casts = [

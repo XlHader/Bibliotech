@@ -10,14 +10,13 @@ class AuthService
     public function login(mixed $data)
     {
         if (!Auth::attempt($data))
-            return throw new \Exception('Credenciales incorrectas', 401);
+            throw new \Exception('Credenciales incorrectas', 401);
 
         $user = Auth::user();
 
         return [
             'token' => $user->createToken('token')->plainTextToken,
-            'user' => $user,
-            'message' => 'Sesión iniciada correctamente'
+            'user' => $user
         ];
     }
 
@@ -32,17 +31,12 @@ class AuthService
         return [
             'token' => $user->createToken('token')->plainTextToken,
             'user' => $user,
-            'message' => 'Usuario creado correctamente'
         ];
     }
 
     public function logout(User $user)
     {
         $user->currentAccessToken()->delete();
-
-        return [
-            'user' => null,
-            'message' => 'Sesión cerrada correctamente'
-        ];
+        return null;
     }
 }

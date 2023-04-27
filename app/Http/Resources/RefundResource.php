@@ -17,6 +17,8 @@ class RefundResource extends JsonResource
         return [
             'id' => $this->id,
             'loan' => $this->loan,
+            'days_of_delay' => $this->days_of_delay,
+            'penalty' => $this->penalty,
             'refund_date' => $this->refund_date,
             'created_at' => $this->created_at
         ];

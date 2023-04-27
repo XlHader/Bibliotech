@@ -37,6 +37,6 @@ class Book extends Model
      */
     public function loans()
     {
-        return $this->belongsToMany(Loan::class, 'loans', 'book_id', 'client_id');
+        return $this->belongsToMany(Client::class, 'loans', 'book_id', 'client_id');
     }
 }

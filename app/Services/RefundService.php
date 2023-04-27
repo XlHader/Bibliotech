@@ -46,26 +46,24 @@ class RefundService
 
     }
 
-    public static function createRefund(int $loanId, Carbon $refundDate)
+    public static function createRefund(array $data)
     {
         try {
-            return Refund::create([
-                'loan_id' => $loanId,
-                'refund_date' => $refundDate
-            ]);
+            return Refund::create($data);
         } catch (\Throwable $th) {
             throw new ValidationException('No se pudo registrar la devolución', 422);
         }
 
     }
 
-    public static function updateRefund(Refund $refund, int $daysOfDelay, int $penalty)
+    public static function updateRefund(int $refundId, int $daysOfDelay, int $penalty)
     {
         try {
-            $refund->update([
-                'days_of_delay' => $daysOfDelay,
-                'penalty' => $penalty
-            ]);
+            return Refund::where('id', $refundId)
+                ->update([
+                    'days_of_delay' => $daysOfDelay,
+                    'penalty' => $penalty
+                ]);
         } catch (\Throwable $th) {
             throw new ValidationException('No se pudo actualizar la devolución', 422);
         }

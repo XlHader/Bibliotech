@@ -22,7 +22,8 @@ class BookResource extends JsonResource
             "icon" => $this->icon,
             "isbn_code" => $this->isbn_code,
             "category_id" => $this->category_id,
-            "is_avaible" => $this->is_avaible
+            "is_avaible" => $this->is_avaible,
+            "loans" => $this->loans
         ];
     }
 }

@@ -18,7 +18,7 @@ class BookController extends Controller
         $user_is_admin = auth()->user()->admin;
         return new BookCollection(
             $user_is_admin
-            ? Book::all()
+            ? Book::with('loans')->get()
             : Book::where('is_avaible', true)->get()
         );
     }
@@ -69,7 +69,7 @@ class BookController extends Controller
         try {
             $book = Book::findOrFail($bookId);
             $book->delete();
-            return jsonResponse('El libro se ha eliminado correctamente.', $book);
+            return jsonResponse('El libro se ha eliminado correctamente.');
         } catch (ModelNotFoundException $exception) {
             return jsonResponse('El libro que desea eliminar no existe.', null, 404);
         }
