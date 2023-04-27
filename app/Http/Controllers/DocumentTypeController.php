@@ -19,7 +19,7 @@ class DocumentTypeController extends Controller
             $documentType = DocumentType::create($data);
             return jsonResponse('El documento se ha creado correctamente', $documentType, 201);
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['DocumentType' => $e->getMessage()], $e->getCode());
+            return validationErrorResponse(['DocumentType' => [$e->getMessage()]], $e->getCode());
         }
     }
 }

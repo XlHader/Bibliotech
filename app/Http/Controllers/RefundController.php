@@ -48,7 +48,7 @@ class RefundController extends Controller
 
             return jsonResponse($message, $refund);
         } catch (ModelNotFoundException | ValidationException $e) {
-            return validationErrorResponse(['loan refund' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['loan refund' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         }
     }
 
@@ -61,7 +61,7 @@ class RefundController extends Controller
             $refund = Refund::with('loan')->findOrFail($refundId);
             return jsonResponse('Devolución encontrada', $refund);
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['refund' => 'No se ha encontrado una devolución con el ID ingresado.'], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['refund' => ['No se ha encontrado una devolución con el ID ingresado.']], getStatusResponse($e->getCode()));
         }
     }
 
@@ -75,7 +75,7 @@ class RefundController extends Controller
             $refund->update($request->all());
             return jsonResponse('Devolución actualizada correctamente.', $refund);
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['refund' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['refund' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         }
     }
 
@@ -89,7 +89,7 @@ class RefundController extends Controller
             $refund->delete();
             return jsonResponse('Devolución eliminada correctamente.', $refund);
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['refund' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['refund' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         }
     }
 }

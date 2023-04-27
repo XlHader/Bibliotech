@@ -21,7 +21,7 @@ class AuthController extends Controller
         try {
             return jsonResponse('Sesión iniciada correctamente', $this->authService->login($request->validated()));
         } catch (\Exception $e) {
-            return validationErrorResponse(['Login' => $e->getMessage()], $e->getCode());
+            return validationErrorResponse(['login' => [$e->getMessage()]], $e->getCode());
         }
     }
 
@@ -30,7 +30,7 @@ class AuthController extends Controller
         try {
             return jsonResponse('Usuario creado correctamente', $this->authService->register($request->validated()));
         } catch (\Exception $e) {
-            return validationErrorResponse(['Register' => $e->getMessage()], $e->getCode());
+            return validationErrorResponse(['register' => [$e->getMessage()]], $e->getCode());
         }
     }
     public function logout(Request $request)
@@ -38,7 +38,7 @@ class AuthController extends Controller
         try {
             return jsonResponse('Sesión cerrada correctamente', $this->authService->logout($request->user()));
         } catch (\Exception $e) {
-            return validationErrorResponse(['Logout' => $e->getMessage()], $e->getCode());
+            return validationErrorResponse(['logout' => [$e->getMessage()]], $e->getCode());
         }
     }
 }

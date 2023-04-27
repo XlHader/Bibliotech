@@ -39,9 +39,9 @@ class LoanController extends Controller
 
             return jsonResponse('El préstamo de los libros ' . LoanService::getBooksTitles($avaibleBooksIds) . ' se ha realizado correctamente.', null, 201);
         } catch (InvalidArgumentException $e) {
-            return validationErrorResponse(['InvalidArgument' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['loan' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         } catch (\Throwable $th) {
-            return validationErrorResponse(['Throwable' => $th->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['loan' => [$th->getMessage()]], getStatusResponse($e->getCode()));
         }
     }
 
@@ -55,7 +55,7 @@ class LoanController extends Controller
 
             return jsonResponse('Préstamo obtenido correctamente.', $loan);
         } catch (\Exception $e) {
-            return validationErrorResponse(['Loand' => 'No hay resultados de préstamos para el id ingresado.'], 422);
+            return validationErrorResponse(['loan' => ['No hay resultados de préstamos para el id ingresado.']], 422);
         }
     }
 
@@ -71,7 +71,7 @@ class LoanController extends Controller
 
             return jsonResponse('Préstamo actualizado correctamente.', $loan);
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['Loan' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['loan' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         }
     }
 
@@ -87,7 +87,7 @@ class LoanController extends Controller
 
             return jsonResponse('Préstamo eliminado correctamente.');
         } catch (ModelNotFoundException $e) {
-            return validationErrorResponse(['Loan' => $e->getMessage()], getStatusResponse($e->getCode()));
+            return validationErrorResponse(['loan' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         }
     }
 }
