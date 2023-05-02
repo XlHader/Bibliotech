@@ -30,7 +30,7 @@ class RefundController extends Controller
 
             $refundData = [
                 'loan_id' => $loanId,
-                'refund_date' => now()->add(20, 'days') // Simulando que se entrego después de 20 días. Normalmente solo iría Now()
+                'refund_date' => now()
             ];
 
             $loanReturnDateLimit = new Carbon($loan['return_date_limit']);
@@ -45,6 +45,10 @@ class RefundController extends Controller
             $refund = RefundService::createRefund($refundData);
 
             $message = RefundService::getRefundMessage($loan['book']['title'], $daysOfDelay ?? 0, $penalty ?? 0);
+
+            // Update book state, 1. Get book id from loan, 2. Update book state
+            $bookId = $loan['book']['id'];
+            RefundService::updateBookState($bookId);
 
             return jsonResponse($message, $refund);
         } catch (ModelNotFoundException | ValidationException $e) {

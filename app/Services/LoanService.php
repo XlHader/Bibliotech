@@ -21,8 +21,9 @@ class LoanService
 
     public static function validateAvailableBooks($avaibleBooksIds)
     {
-        if (count($avaibleBooksIds) == 0)
-            throw new InvalidArgumentException('De los libros seleccionados ninguno se encuentra disponible');
+        $bookQuantity = count($avaibleBooksIds);
+        if ($bookQuantity == 0)
+            throw new InvalidArgumentException($bookQuantity > 1 ? 'De los libros seleccionados ninguno se encuentra disponible' : 'El libro seleccionado no se encuentra disponible', 422);
     }
 
     public static function getBooksTitles($booksIds)

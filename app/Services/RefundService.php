@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Book;
 use App\Models\Loan;
 use App\Models\Refund;
 use Carbon\Carbon;
@@ -66,6 +67,17 @@ class RefundService
                 ]);
         } catch (\Throwable $th) {
             throw new ValidationException('No se pudo actualizar la devolución', 422);
+        }
+    }
+
+    public static function updateBookState(int $bookId) {
+        try {
+            return Book::where('id', $bookId)
+                ->update([
+                    'is_avaible' => true
+                ]);
+        } catch (\Throwable $th) {
+            throw new ValidationException('No se pudo actualizar el estado del libro', 422);
         }
     }
 }

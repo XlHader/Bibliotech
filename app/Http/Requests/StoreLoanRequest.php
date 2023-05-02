@@ -6,10 +6,12 @@ use App\Http\Requests\BaseRequest;
 
 class StoreLoanRequest extends BaseRequest
 {
-    public function prepareForValidation() {
-        $this->merge([
-            'books_ids' => json_decode($this->books_ids, true)
-        ]);
+    public function prepareForValidation()
+    {
+        if ($this->books_ids && is_string($this->books_ids))
+            $this->merge([
+                'books_ids' => json_decode($this->books_ids, true)
+            ]);
     }
 
     /**
@@ -48,8 +50,8 @@ class StoreLoanRequest extends BaseRequest
     public function messages(): array
     {
         return [
-            'client_id.required' => 'El campo :attribute es requerido',
-            'client_id.exists' => 'El campo :attribute no existe',
+            'client_id.required' => 'El campo client_id es requerido',
+            'client_id.exists' => 'El campo client_id no existe en la',
             'client_id.max_unreturned_loans' => 'El cliente tiene 3 o más préstamos sin devolver',
             'client_id.max_late_refunds' => 'El cliente tiene 3 o más devoluciones atrasadas',
             'books_ids.required' => 'El campo :attribute es requerido',

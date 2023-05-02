@@ -23,7 +23,13 @@ class BookResource extends JsonResource
             "isbn_code" => $this->isbn_code,
             "category_id" => $this->category_id,
             "is_avaible" => $this->is_avaible,
-            "loans" => $this->loans
+            "loans" => $this->loans()->withPivot('id')->get()->map(function($loan) {
+                return [
+                    'id' => $loan->pivot->id,
+                    'client_id' => $loan->id,
+                    'book_id' => $loan->pivot->book_id
+                ];
+            })
         ];
     }
 }

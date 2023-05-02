@@ -37,7 +37,7 @@ class LoanController extends Controller
             $loans = LoanService::createLoansArray($clientId, $avaibleBooksIds);
             LoanService::saveLoansAndMarkBooksAsUnavailable($loans, $avaibleBooksIds);
 
-            return jsonResponse('El préstamo de los libros ' . LoanService::getBooksTitles($avaibleBooksIds) . ' se ha realizado correctamente.', null, 201);
+            return jsonResponse(count($avaibleBooksIds) > 1 ? 'El préstamo de los libros ' : 'El préstamo del libro ' . LoanService::getBooksTitles($avaibleBooksIds) . ' se ha realizado correctamente.', null, 201);
         } catch (InvalidArgumentException $e) {
             return validationErrorResponse(['loan' => [$e->getMessage()]], getStatusResponse($e->getCode()));
         } catch (\Throwable $th) {
